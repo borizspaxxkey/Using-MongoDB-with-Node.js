@@ -44,11 +44,14 @@ async function main() {
         const deletedItem = await circulationRepo.getById( addedItem._id );
         assert.equal(deletedItem, null);
         
+        const avgFinalists = await circulationRepo.averageFinalists();
+        console.log('Average Finalists: ' + avgFinalists);
     } catch ( error ) {
 
         ( error );
     } finally {
         const admin = client.db( dbName ).admin();
+
 
         await client.db( dbName ).dropDatabase();
         console.log( await admin.listDatabases() );
